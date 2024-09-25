@@ -13,6 +13,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 @Slf4j
 @Controller
@@ -24,8 +25,15 @@ public class MemberController {
 
     @GetMapping("/")
     public String showRegistrationForm(Model model) {
+
+
+        String context = ServletUriComponentsBuilder.fromCurrentContextPath()
+                .path("/rest/members")
+                .toUriString();
+
         model.addAttribute("member", new MemberEntity());
         model.addAttribute("members", memberService.getAllMembers());
+        model.addAttribute("context",context);
         return "register";
     }
 

@@ -9,6 +9,7 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -19,7 +20,14 @@ public class MemberServiceImpl implements MemberService {
 
     @Override
     public List<MemberEntity> getAllMembers() {
+
         return memberRepository.findAll();
+    }
+
+    @Override
+    public Optional<MemberEntity> getMemberById(Long id) {
+        return  memberRepository.findById(id);
+
     }
 
     @Override
